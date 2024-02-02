@@ -22,6 +22,7 @@ Hello! Thank you for taking interest in the development of the PortalBot.
 -> TO DO <-
 - Change pinnerino to webhooks
 - Finish wr archive entries
+- Add requirements.txt for easy pip install
 - Potential re-write (its currently a nightmare)
 ------------
 
