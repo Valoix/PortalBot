@@ -68,6 +68,8 @@ def tick_to_time(ticks):
                 return "That is over a month long, I no no wanna :("
             if ticks == 1163:
                 return f"Your ticks in real time is {second_to_minute(time)} (:heart:)"
+            if ticks == 4104:
+                return f"Your ticks in real time is {second_to_minute(time)} (<:no4104:1180929144977117364>)"
             return f"Your ticks in real time is {second_to_minute(time)}"
         except:
             return f"'{ticks}' was not a valid tick count, please try again!"
