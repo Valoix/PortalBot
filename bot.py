@@ -7,6 +7,7 @@ import ticks
 import os
 from moviepy.editor import *
 import random
+import demoparser
 
 """
 COLOUR CODES:
@@ -241,6 +242,43 @@ def run_discord_bot():
                 print(responses.print_colour("R", e))
                 await message.reply("i no no wanna :(")
         
+        # Parse Demo
+        if user_message == "parsedemo++":
+            demo = message.attachments[0]
+            attachments_filename = str(message.attachments).split("'")[1]
+            if not attachments_filename.endswith(".dem"):
+                await message.reply("Invalid demo file >:(")
+            else:
+                try:
+                    print(responses.print_colour("B", "Downloading Demo..."))
+                    await demo.save("./downloads/demo2time.dem")
+                    print(responses.print_colour("G", "Downloaded"))
+
+                    with open("./downloads/demo2time.dem", "rb") as f:
+                        demo_data = f.read()
+                    
+                    parser = demoparser.Parser(demo_data)
+                    parser.parse_demo()
+                    
+                    # if filestamp was wrong
+                    if parser.demo == demoparser.Demo():
+                        await message.reply(f"Unable to parse demo! Invalid filestamp!")     
+
+                    # pretty embed
+                    await message.reply(embed=parser.generate_embed(attachments_filename))
+
+                    # remove demo from downloads
+                    try:
+                        os.remove("./downloads/demo2time.dem")
+                    except:
+                        pass
+                except:
+                    await message.channel.send("Something went wrong!!! :((")
+                    try:
+                        os.remove("./downloads/demo2time.dem")
+                    except:
+                        pass
+
         try:
             try:
                 attachments = message.attachments
