@@ -63,7 +63,7 @@ def tick_to_time(ticks):
     try:
         try:
             ticks = int(ticks)
-            time = float(ticks) * 0.015
+            time = round(float(ticks) * 0.015, 3)
             if time > 2678400:
                 return "That is over a month long, I no no wanna :("
             if ticks == 1163:
